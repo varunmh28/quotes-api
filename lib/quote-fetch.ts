@@ -1,5 +1,8 @@
 // src/lib/quotes.ts (or quote-fetch.ts)
-import { DevJoke } from "@/.next/types/quote";
+
+
+import { DevJoke } from "@/types/quote";
+
 
 export async function getRandomDevJoke(): Promise<DevJoke> {
   // We point directly to the base path of the endpoint you linked.
