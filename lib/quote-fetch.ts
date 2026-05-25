@@ -1,18 +1,16 @@
-// src/lib/quotes.ts (or quote-fetch.ts)
-import { DevJoke } from "@/.next/types/quote";
+// src/lib/quotes.ts
+import { AuthorsResponse } from "@/types/quote";
 
-export async function getRandomDevJoke(): Promise<DevJoke> {
-  // We point directly to the base path of the endpoint you linked.
-  // We drop '?type=inspirational' completely to prevent the 400 Bad Request error.
-  const url = 'https://quotes-api12.p.rapidapi.com/quotes/random?type=inspirational'; 
+export async function getAllAuthors(): Promise<AuthorsResponse> {
+  const url = 'https://quotes-api12.p.rapidapi.com/author?page=1&limit=200'; // you can change pages and limit 
 
   const response = await fetch(url, {
     method: 'GET',
     headers: {
-      'x-rapidapi-key': process.env.RAPID_API_KEY as string,
-      'x-rapidapi-host': process.env.RAPID_API_HOST as string,
+      'x-rapidapi-key': 'e4cc73c410mshe6884844d52e739p17ef1ajsn65ef6b10ba07',
+      'x-rapidapi-host': 'quotes-api12.p.rapidapi.com',
     },
-    next: { revalidate: 0 } // Fetch a completely new joke every time you refresh
+    next: { revalidate: 3600 } 
   });
 
   if (!response.ok) {
